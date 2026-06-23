@@ -1,0 +1,13 @@
+diff --git a/node.js b/node.js
+index 78d3804564e9bf66d48c7896c0b3caab629289bd..2c93c9ef89c848d230bdc124304ae8ca536f5130 100644
+--- a/node.js
++++ b/node.js	
+@@ -27,7 +27,7 @@ function checkExtend(name) {
+       'Browserslist config needs `browserslist-config-` prefix. ' + use
+     )
+   }
+-  if (name.replace(/^@[^/]+\
++  if (name.replace(/^@[^/]+\/|^[^/]+\//, '').indexOf('.') !== -1) {
+     throw new BrowserslistError(
+       '`.` not allowed in Browserslist config name. ' + use
+     )

@@ -1,0 +1,15 @@
+shellEmulator: true
+
+allowBuilds:
+  '@parcel/watcher': true
+  '@prisma/client': true
+  '@prisma/engines': true
+  '@sentry/cli': true
+  esbuild: true
+  msgpackr-extract: true
+  prisma: true
+  puppeteer: true
+  sharp: true
+  vue-demi: true
+patchedDependencies:
+  browserslist@4.28.3: patches/browserslist@4.28.3.patch
