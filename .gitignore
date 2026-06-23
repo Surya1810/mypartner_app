@@ -25,3 +25,20 @@ logs
 
 # GCS service account (secrets)
 gcs-service-account.json
+
+# ─── Planning artifacts (main branch only) ───────────────────────────────────
+# These files exist on development branch but must not ship to main.
+# See CLAUDE.md → "Planning and tooling artifacts: branch rules"
+.plan/
+CLAUDE.md
+GEMINI.md
+PLANNER.md
+EXECUTOR.md
+AGENTS.md
+.cursorrules
+.mcp.json
+.opencode.json
+.windsurfrules
+QODER.md
+.kiro/
+.qoder/
