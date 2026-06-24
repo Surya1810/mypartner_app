@@ -15,9 +15,13 @@
   },
   "dependencies": {
     "@fontsource/inter": "^5.2.8",
+    "@fontsource/jetbrains-mono": "^5.2.8",
+    "@fontsource/kanit": "^5.2.8",
+    "@fontsource/montserrat": "^5.2.8",
     "@google-cloud/storage": "^7.21.0",
     "@lucide/vue": "^1.21.0",
     "@nuxt/image": "^2.0.0",
+    "@nuxtjs/color-mode": "^4.0.1",
     "@prisma/client": "^6.19.3",
     "@sentry/nuxt": "^10.59.0",
     "@vee-validate/zod": "^4.15.1",
@@ -70,7 +74,8 @@
     "tailwindcss": "^4.3.1",
     "tailwindcss-animate": "^1.0.7",
     "typescript": "^6.0.3",
-    "vitest": "^4.1.9"
+    "vitest": "^4.1.9",
+    "vue-tsc": "^3.3.5"
   },
   "lint-staged": {
     "*.{ts,vue}": [

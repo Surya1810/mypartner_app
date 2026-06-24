@@ -8,112 +8,98 @@
 ## 1. Design Tokens — CSS Variables
 
 All variables live in ONE file: `app/assets/css/globals.css`.  
-Never hardcode hex colors in component classes if a CSS variable exists.  
+We use Tailwind v4 `@theme` scale. Never hardcode hex colors in component classes if a CSS variable exists.  
 Never define tokens in component `<style>` blocks.
 
 ```css
 /* app/assets/css/globals.css */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-@layer base {
-  :root {
-    /* ─── Brand ─────────────────────────────────────── */
-    --color-primary: #0055ff;
-    --color-primary-fg: #ffffff;
-    --color-primary-subtle: #eef3ff; /* icon bg, info badge bg */
-    --color-primary-muted: rgba(0, 85, 255, 0.15); /* accent strip */
+@theme {
+  /* ── Fonts ─────────────────────────────────────────────── */
+  --font-sans: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Kanit", "Montserrat", ui-sans-serif, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
-    /* ─── Sidebar / Navigation ────────────────────── */
-    --color-sidebar-bg: #0d1017;
-    --color-sidebar-item-active: #0055ff;
-    --color-sidebar-icon-muted: #353b47;
-    --color-sidebar-text-muted: #4b5260;
-    --color-sidebar-text-active: #ffffff;
-    --sidebar-width: 260px;
+  /* ── Brand scale ─────────────────────────────────────── */
+  --color-brand-50: #eef3ff;
+  --color-brand-100: #d9e4ff;
+  --color-brand-200: #b3c9ff;
+  --color-brand-300: #80a4ff;
+  --color-brand-400: #4d7eff;
+  --color-brand-500: #0055ff;
+  --color-brand-600: #0047d6;
+  --color-brand-700: #0039ad;
+  --color-brand-800: #002c85;
+  --color-brand-900: #001f5c;
 
-    /* ─── Page Layout ─────────────────────────────── */
-    --color-background: #f7f8fa; /* page/content bg */
-    --color-surface: #ffffff; /* card, navbar, modal */
-    --color-surface-input: #f1f2f5; /* input, search, select bg */
-    --color-hero-dark: #111111; /* hero dark banner */
-    --navbar-height: 64px;
+  /* ── Neutral / Ink scale ────────────────────────────── */
+  --color-neutral-0: #ffffff;
+  --color-neutral-50: #f7f8fa;
+  --color-neutral-100: #f1f2f5;
+  --color-neutral-200: #e5e7ec;
+  --color-neutral-300: #d3d7df;
+  --color-neutral-400: #9aa0ad;
+  --color-neutral-500: #6b7280;
+  --color-neutral-600: #4b5260;
+  --color-neutral-700: #353b47;
+  --color-neutral-750: #2a2f3b;
+  --color-neutral-800: #21262f;
+  --color-neutral-850: #191e27;
+  --color-neutral-900: #14171c;
+  --color-neutral-950: #0d1017;
 
-    /* ─── Text ────────────────────────────────────── */
-    --color-text-primary: #0d1017; /* headings, body text */
-    --color-text-secondary: #4b5260; /* labels, captions */
-    --color-text-muted: #8b919e; /* placeholders, hints */
-    --color-text-disabled: #d3d7df;
+  /* ── Ink (text) ─────────────────────────────────────── */
+  --color-ink: #1b1b1b;
+  --color-ink-near: #111111;
 
-    /* ─── Borders & Dividers ──────────────────────── */
-    --color-border: #f1f2f5; /* table rows, card borders */
-    --color-border-strong: #e5e7ec; /* inputs, stronger dividers */
-    --color-skeleton: #e5e7ec; /* skeleton loaders */
-    --color-skeleton-dark: #d3d7df; /* table column headers */
+  /* ── Semantic: Success ──────────────────────────────── */
+  --color-success-50: #e8f8ef;
+  --color-success-100: #c6eed7;
+  --color-success-500: #15a05a;
+  --color-success-600: #11874c;
+  --color-success-700: #0c6b3c;
 
-    /* ─── Semantic: Success ───────────────────────── */
-    --color-success-bg: #e8f8ef;
-    --color-success-text: #0f7b3e;
-    --color-success: #16a34a;
+  /* ── Semantic: Warning ──────────────────────────────── */
+  --color-warning-50: #fef4e5;
+  --color-warning-100: #fce3bc;
+  --color-warning-500: #e8920c;
+  --color-warning-600: #c2790a;
+  --color-warning-700: #945c06;
 
-    /* ─── Semantic: Warning ───────────────────────── */
-    --color-warning-bg: #fef4e5;
-    --color-warning-text: #b45309;
-    --color-warning: #d97706;
+  /* ── Semantic: Danger ───────────────────────────────── */
+  --color-danger-50: #fdecec;
+  --color-danger-100: #f9cfcf;
+  --color-danger-500: #e11900;
+  --color-danger-600: #be1500;
+  --color-danger-700: #911000;
 
-    /* ─── Semantic: Error ─────────────────────────── */
-    --color-error-bg: #fef2f2;
-    --color-error-text: #b91c1c;
-    --color-error: #dc2626;
+  /* ── Shadows ────────────────────────────────────────── */
+  --shadow-xs: 0 1px 2px rgba(20, 23, 28, 0.05);
+  --shadow-soft:
+    0 1px 3px rgba(20, 23, 28, 0.06), 0 1px 2px rgba(20, 23, 28, 0.04);
+  --shadow-card:
+    0 4px 12px rgba(20, 23, 28, 0.07), 0 2px 4px rgba(20, 23, 28, 0.04);
+  --shadow-lift:
+    0 12px 28px rgba(20, 23, 28, 0.1), 0 4px 8px rgba(20, 23, 28, 0.05);
+  --shadow-xl:
+    0 24px 50px rgba(20, 23, 28, 0.14), 0 8px 16px rgba(20, 23, 28, 0.06);
+  --shadow-brand:
+    0 10px 24px rgba(0, 85, 255, 0.18), 0 2px 6px rgba(0, 85, 255, 0.1);
+  --shadow-card-dark:
+    0 4px 14px rgba(0, 0, 0, 0.28), 0 2px 4px rgba(0, 0, 0, 0.16);
 
-    /* ─── Semantic: Info ──────────────────────────── */
-    --color-info-bg: #eef3ff; /* same as primary-subtle */
-    --color-info-text: #0055ff;
-    --color-info: #0055ff;
+  /* ── Border Radius ──────────────────────────────────── */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
 
-    /* ─── Border Radius ───────────────────────────── */
-    --radius-xs: 3px; /* small tags, chip labels */
-    --radius-sm: 4px; /* badges, compact elements */
-    --radius-md: 6px; /* buttons, inputs, nav items */
-    --radius-lg: 8px; /* icon containers, small cards */
-    --radius-xl: 12px; /* stat cards, table containers */
-    --radius-2xl: 14px; /* avatar circles */
-    --radius-3xl: 16px; /* hero cards, large modals */
-    --radius-full: 9999px; /* pills, circular badges */
-
-    /* ─── Shadows ─────────────────────────────────── */
-    --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
-    --shadow-modal:
-      0 8px 24px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.08);
-    --shadow-dropdown:
-      0 4px 12px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.06);
-
-    /* ─── Spacing Scale ───────────────────────────── */
-    /* Tailwind default scale is sufficient. Use Tailwind classes. */
-    /* Layout-specific values: */
-    --content-padding-x: 2rem; /* 32px — inner content horizontal padding */
-    --content-padding-y: 1.5rem; /* 24px — inner content vertical padding */
-  }
-
-  /* ─── Dark mode: sidebar tokens remap ──────────────
-     App uses a light content area with a dark sidebar.
-     Full dark mode is NOT in scope for Phase 1.
-  ───────────────────────────────────────────────── */
-
-  body {
-    background-color: var(--color-background);
-    color: var(--color-text-primary);
-    font-family:
-      "Inter",
-      -apple-system,
-      BlinkMacSystemFont,
-      "Segoe UI",
-      sans-serif;
-    font-size: 14px;
-    line-height: 1.5;
-    -webkit-font-smoothing: antialiased;
-  }
+  /* ── Layout ─────────────────────────────────────────── */
+  --sidebar-width: 260px;
+  --navbar-height: 64px;
 }
 ```
 
@@ -121,28 +107,37 @@ Never define tokens in component `<style>` blocks.
 
 ## 2. Typography
 
-**Font:** Inter (via `@fontsource/inter` — already in deps).  
+**Font:** Montserrat + Kanit + JetBrains Mono  
 Register in `nuxt.config.ts`:
 
 ```ts
 css: [
-  '@fontsource/inter/400.css',
-  '@fontsource/inter/500.css',
-  '@fontsource/inter/600.css',
-  '@fontsource/inter/700.css',
+  // Montserrat — body font
+  '@fontsource/montserrat/400.css',
+  '@fontsource/montserrat/500.css',
+  '@fontsource/montserrat/600.css',
+  '@fontsource/montserrat/700.css',
+  // Kanit — display/heading font
+  '@fontsource/kanit/400.css',
+  '@fontsource/kanit/600.css',
+  '@fontsource/kanit/700.css',
+  // JetBrains Mono — code/mono font
+  '@fontsource/jetbrains-mono/400.css',
+  '@fontsource/jetbrains-mono/500.css',
+  // Global styles
   '~/assets/css/globals.css',
 ],
 ```
 
-| Role        | Size       | Weight | Usage                      |
-| ----------- | ---------- | ------ | -------------------------- |
-| Display     | 24px / 1.3 | 700    | Page titles, hero headings |
-| Heading 1   | 20px / 1.4 | 600    | Section headings           |
-| Heading 2   | 16px / 1.4 | 600    | Card titles, modal titles  |
-| Body        | 14px / 1.5 | 400    | All body text (default)    |
-| Body Medium | 14px / 1.5 | 500    | Labels, nav items          |
-| Small       | 12px / 1.5 | 400    | Captions, meta info        |
-| Mono        | 13px / 1.5 | 400    | Codes, vault passwords     |
+| Role        | Size       | Weight | Font           | Usage                      |
+| ----------- | ---------- | ------ | -------------- | -------------------------- |
+| Display     | 24px / 1.3 | 700    | Kanit          | Page titles, hero headings |
+| Heading 1   | 20px / 1.4 | 600    | Kanit          | Section headings           |
+| Heading 2   | 16px / 1.4 | 600    | Kanit          | Card titles, modal titles  |
+| Body        | 14px / 1.5 | 400    | Montserrat     | All body text (default)    |
+| Body Medium | 14px / 1.5 | 500    | Montserrat     | Labels, nav items          |
+| Small       | 12px / 1.5 | 400    | Montserrat     | Captions, meta info        |
+| Mono        | 13px / 1.5 | 400    | JetBrains Mono | Codes, vault passwords     |
 
 ---
 
@@ -178,51 +173,43 @@ The Nuxt layout file: `app/layouts/admin.vue`
 
 ## 4. Component Conventions
 
-### Cards
+Pola wajib dari UI Kit:
 
-```html
-<!-- Stat card -->
-<div class="bg-white rounded-xl shadow-card p-6">
-  <!-- icon container: 40×40, bg semantic color, rx-lg -->
-  <!-- value: text-2xl font-bold -->
-  <!-- label: text-sm text-secondary -->
-</div>
+```
+Input pattern:
+  h-11 px-3.5 rounded-md bg-white border border-neutral-300 text-sm text-ink
+  placeholder:text-neutral-400
+  focus:border-brand-500 focus:ring-4 focus:ring-brand-500/15 outline-none transition
 
-<!-- Hero dark card -->
-<div class="rounded-3xl p-8" style="background: var(--color-hero-dark)">
-  <!-- content on dark bg, white text -->
-</div>
+Button solid:
+  h-10 px-4 rounded-md bg-brand-500 hover:bg-brand-600 text-white text-sm font-semibold shadow-brand transition-colors
+
+Button outline:
+  h-10 px-4 rounded-md bg-white border border-neutral-300 hover:border-brand-500
+  hover:text-brand-600 text-ink text-sm font-semibold shadow-xs transition-colors
+
+Button ghost:
+  h-10 px-4 rounded-md text-brand-600 hover:bg-brand-50 text-sm font-semibold transition-colors
+
+Card:
+  bg-white rounded-lg border border-neutral-200 shadow-soft p-6
+
+Section header label (above card):
+  text-xs font-semibold uppercase tracking-[.12em] text-neutral-400 mb-3
 ```
 
 ### Badges / Status Chips
 
 ```html
 <!-- Success -->
-<span
-  class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
-  style="background: var(--color-success-bg); color: var(--color-success-text)"
->
-  Aktif
-</span>
+<span class="badge-success">Aktif</span>
 <!-- Warning -->
-<span
-  style="background: var(--color-warning-bg); color: var(--color-warning-text)"
-  >...</span
->
+<span class="badge-warning">Pending</span>
 <!-- Info -->
-<span style="background: var(--color-info-bg); color: var(--color-info-text)"
-  >...</span
->
+<span class="badge-brand">Info</span>
+<!-- Danger -->
+<span class="badge-danger">Error</span>
 ```
-
-### Buttons
-
-- Primary: `bg-primary text-white` (brand blue, rx-md)
-- Secondary: `bg-surface border border-border text-text-primary`
-- Destructive: `bg-error text-white`
-- Ghost: `hover:bg-surface-input text-text-secondary`
-
-All buttons use `rx-md` (6px) unless in a compact row context.
 
 ### Tables
 
@@ -230,14 +217,6 @@ All buttons use `rx-md` (6px) unless in a compact row context.
 - Header row: `bg-background` (`#F7F8FA`), text `text-muted` small
 - Body rows: `border-b border-border` dividers, `#F1F2F5`
 - Row hover: `hover:bg-surface-input`
-
-### Inputs / Forms
-
-- Background: `var(--color-surface-input)` (`#F1F2F5`)
-- Border: `var(--color-border-strong)` (`#E5E7EC`) — only visible on focus or error
-- Focus ring: `2px solid var(--color-primary)`
-- Error state: `border-error` + `text-error` message below
-- All inputs use `rx-md` (6px)
 
 ---
 
@@ -247,26 +226,26 @@ In `components.json` and the shadcn CSS variable block, map to our tokens:
 
 ```css
 /* Inside @layer base { :root { ... } } — after our custom vars */
---background: 0 0% 97%; /* approx #F7F8FA */
---foreground: 220 20% 7%; /* approx #0D1017 */
---card: 0 0% 100%; /* #FFFFFF */
---card-foreground: 220 20% 7%;
+--background: 220 14% 98%; /* neutral-50 */
+--foreground: 0 0% 11%; /* ink #1B1B1B */
+--card: 0 0% 100%;
+--card-foreground: 0 0% 11%;
 --popover: 0 0% 100%;
---popover-foreground: 220 20% 7%;
---primary: 220 100% 50%; /* #0055FF */
+--popover-foreground: 0 0% 11%;
+--primary: 220 100% 50%; /* brand-500 #0055FF */
 --primary-foreground: 0 0% 100%;
---secondary: 220 9% 46%; /* #4B5260 */
+--secondary: 220 9% 29%; /* neutral-700 #353B47 */
 --secondary-foreground: 0 0% 100%;
---muted: 220 14% 96%; /* #F1F2F5 */
---muted-foreground: 220 13% 50%; /* #8B919E */
---accent: 220 100% 93%; /* #EEF3FF */
+--muted: 220 14% 95%; /* neutral-100 */
+--muted-foreground: 220 13% 56%; /* neutral-500 */
+--accent: 220 100% 93%; /* brand-50 */
 --accent-foreground: 220 100% 50%;
---destructive: 0 73% 51%; /* #DC2626 */
+--destructive: 8 100% 44%; /* danger-500 #E11900 */
 --destructive-foreground: 0 0% 100%;
---border: 220 13% 91%; /* #E5E7EC */
---input: 220 14% 95%; /* #F1F2F5 */
---ring: 220 100% 50%; /* #0055FF */
---radius: 0.375rem; /* 6px = var(--radius-md) */
+--border: 220 13% 90%; /* neutral-200 */
+--input: 220 14% 95%; /* neutral-100 */
+--ring: 220 100% 50%; /* brand-500 */
+--radius: 0.5rem; /* 8px = radius-md */
 ```
 
 ---
@@ -274,7 +253,7 @@ In `components.json` and the shadcn CSS variable block, map to our tokens:
 ## 6. What NOT to Do
 
 - ❌ No hardcoded hex in component classes (use CSS vars or Tailwind tokens)
-- ❌ No `color: #353B47` inline style — use `text-[var(--color-sidebar-icon-muted)]`
+- ❌ No `color: #353B47` inline style — use `text-[var(--color-sidebar-icon-muted)]` or the tailwind config
 - ❌ No custom UI components from scratch if shadcn-vue already has it
 - ❌ No full dark mode implementation (out of scope Phase 1)
 - ❌ No separate CSS files per component — globals.css only for global tokens

@@ -1,2 +1,4 @@
-// TODO: implement in Phase 03
-export {};
+export function useAuth() {
+  const user = useState<null>("auth-user", () => null);
+  return { user };
+}

@@ -9,14 +9,33 @@ export default defineNuxtConfig({
   },
 
   css: [
-    "@fontsource/inter/400.css",
-    "@fontsource/inter/500.css",
-    "@fontsource/inter/600.css",
-    "@fontsource/inter/700.css",
+    // Montserrat — body font
+    "@fontsource/montserrat/400.css",
+    "@fontsource/montserrat/500.css",
+    "@fontsource/montserrat/600.css",
+    "@fontsource/montserrat/700.css",
+    // Kanit — display/heading font
+    "@fontsource/kanit/400.css",
+    "@fontsource/kanit/600.css",
+    "@fontsource/kanit/700.css",
+    // JetBrains Mono — code/mono font
+    "@fontsource/jetbrains-mono/400.css",
+    "@fontsource/jetbrains-mono/500.css",
+    // Global styles
     "~/assets/css/globals.css",
   ],
 
-  modules: ["@nuxt/image", "@vueuse/nuxt", "@sentry/nuxt/module"],
+  modules: [
+    "@nuxt/image",
+    "@vueuse/nuxt",
+    "@sentry/nuxt/module",
+    "@nuxtjs/color-mode",
+  ],
+
+  colorMode: {
+    classSuffix: "",
+    preference: "light",
+  },
 
   components: [
     {
